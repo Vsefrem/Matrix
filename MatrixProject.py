@@ -1,18 +1,12 @@
 # coding: utf-8
 from math import sqrt
+
+import latexcompiler
 import sympy as sp
+from pdflatex import pdflatex
 from pylatex import Document, Math, Package, Center, Section
 from pylatex.utils import rm_temp_dir, NoEscape
 import pylatex as pl
-from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication
-Form, Window = uic.loadUiType("form.ui")
-app = QApplication([])
-window = Window()
-form = Form()
-form.setupUi(window)
-window.show()
-app.exec_()
 
 
 sp.init_printing(use_unicode=False)
@@ -201,7 +195,7 @@ def solution_of_matrix(A, y, A_m, A_n):
         doc.append(Math(inline=True, data=['x^0'], escape=False))
         doc.append('\xa0равна: ')
         doc.append(Math(data=['\|x^0\| = ', x_length], escape=False))
-        doc.generate_pdf("MatrixFile")
+        doc.generate_pdf("Matrix")
 
 # 1 пример
 # A_m = 3
@@ -225,19 +219,19 @@ def solution_of_matrix(A, y, A_m, A_n):
 #                [1]])
 
 # 3 пример
-# A_m = 3
-# A_n = 3
-# A = sp.Matrix([[1, 0, 0],
-#                [0, 1, 0],
-#                [0, 0, 0]])
-#
-# y = sp.Matrix([[10],
-#                [1],
-#                [1]])
+A_m = 3
+A_n = 3
+A = sp.Matrix([[1, 0, 0],
+               [0, 1, 0],
+               [0, 0, 0]])
+
+y = sp.Matrix([[10],
+               [1],
+               [1]])
 
 
-A, A_m, A_n = enter_matrix_A()
-y = enter_matrix_y(A_m)
+# A, A_m, A_n = enter_matrix_A()
+# y = enter_matrix_y(A_m)
 solution_of_matrix(A, y, A_m, A_n)
 
 
